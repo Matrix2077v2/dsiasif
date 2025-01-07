@@ -5,7 +5,7 @@ from queue import Queue
 
 ip_queue = Queue()
 
-NUM_THREADS = 250
+NUM_THREADS = 5
 
 def generate_random_ip():
     return ".".join(str(random.randint(0, 255)) for _ in range(4))
@@ -13,14 +13,14 @@ def generate_random_ip():
 def check_port(ip):
     try:
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-            s.settimeout(2)
+            s.settimeout(1)
             s.connect((ip, 23))
             print(f"{ip}")
     except (socket.timeout, ConnectionRefusedError):
         pass
     except Exception as e:
-        print(f"[Error] {ip}: {e}")
-
+        qwe = 'error'
+        
 def worker():
     while not ip_queue.empty():
         ip = ip_queue.get()
